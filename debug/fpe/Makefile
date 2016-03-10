@@ -1,7 +1,11 @@
 .PHONY: default help object executable all clean segfault dynamic static nobugs
-CC = gcc -g -O0
+CC = gcc
 
 LD = $(CC)
+
+CFLAGS = -g -O0 
+CFLAGS2 = -g -O0 -DTRAPFPE
+LDFLAGS = 
 
 SOURCE_C = $(wildcard *.c)
 OBJECTS_C = $(patsubst %.c, %_c.o, $(SOURCE_C))
@@ -13,10 +17,9 @@ help:
 	@echo "\
 Options:\n\n\
   make all:           make every executable (default)\n\
-  make segfault:      example with a segfault\n\
-  make dynamic:       dynamic arrays with no segfault (doesn't mean no errors!)\n\
-  make static:        static arrays, wrong result\n\
-  make nobugs:        properly working\n\
+  make fpe1:          example 1\n\
+  make fpe2:          example 2\n\
+  make fpe3:          example 3\n\
   make clean:         delete output files\n\
   make help:          display this help"
 
@@ -26,19 +29,17 @@ executable: $(EXECUTABLES)
 
 all: objects executable
 
-segfault: add_array_segfault.e 
+fpe1: test_fpe1.e 
 
-dynamic: add_array_dynamic.e 
+fpe2: test_fpe2.e 
 
-static: add_array_static.e 
-
-nobugs: add_array_nobugs.e 
+fpe3: test_fpe3.e 
 
 %_c.o: %.c
-	$(CC) -c $^ -o $@
+	$(CC) $(CFLAGS2) -c $^ -o $@
 
 %.e: %_c.o
-	$(LD) $^ -o $@
+	$(LD) $(LDFLAGS) $^ fpe_x87_sse/fpe_x87_sse.o -lm -o $@ 
 
 clean:
 	rm -rfv $(OBJECTS_C) $(EXECUTABLES)

@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #ifdef TRAPFPE
-#include "fpe_x87_sse.h"
+#include "fpe_x87_sse/fpe_x87_sse.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -16,7 +17,7 @@ int main(int argc, char *argv[])
   scanf("%f",&a);
   scanf("%f",&b);
 
-  tmp = sqrtf(a / b);
+  tmp = sqrt(a / b);
   
   if(tmp > 2.)
     {
