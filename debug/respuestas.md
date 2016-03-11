@@ -30,8 +30,8 @@ de ejecutar `ulimit -s unlimited` deja de aparece.
 2. Ejecutando `ulimit -s unlimited` se quita la cota máxima al stack
 accesible por el usuario (por defecto, en esta computadora, es de
 8192kb=8Mb). En el caso de small.x, el stack necesario ronda los
-8bytes\*500**2=2Mb, mientras que en el caso de big.x, es
-8bytes\*2500**2=50Mb.
+8bytes\*500\*\*2=2Mb, mientras que en el caso de big.x, es
+8bytes\*2500\*\*2=50Mb.
 
 3. No es una solución en el sentido de debugging porque no soluciona
 el problema en general. Este es un código que va a seguir teniendo un
