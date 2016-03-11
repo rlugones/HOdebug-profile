@@ -36,16 +36,20 @@
 void mat_Tmat_mul( float * A, float * C ){
 
   int i, j, k;
-  float temp[ SIZE ][ SIZE ];
+  //float temp[ SIZE ][ SIZE ];
+  float * temp;
+  temp = (float *) malloc( SIZE * SIZE * sizeof(float) );
 
   for( i = 0; i < SIZE; i++ )
     for( j = 0; j < SIZE; j++ )
-      temp[ j ][ i ] = A[ ( i * SIZE ) + j ];
+      temp[ j *SIZE+ i ] = A[ ( i * SIZE ) + j ];
+      //temp[ j ][ i ] = A[ ( i * SIZE ) + j ];
 
   for( i = 0; i < SIZE; i++ )
     for( j = 0; j < SIZE; j++ )
       for( k = 0; k < SIZE; k++ )
-	C[ ( i * SIZE ) + j ] += A[ ( i * SIZE ) + k ] * temp[ k ][ j ] ;
+	C[ ( i * SIZE ) + j ] += A[ ( i * SIZE ) + k ] * temp[ k * SIZE + j ] ;
+	//C[ ( i * SIZE ) + j ] += A[ ( i * SIZE ) + k ] * temp[ k ][ j ] ;
   
 }
 
