@@ -1,5 +1,5 @@
 CC = gcc 
-OPT_FLAGS = -O0
+OPT_FLAGS = -g -O0
 
 SOURCE = $(wildcard *.c)
 OBJECTS = $(patsubst %.c, %.o, $(SOURCE))
@@ -15,10 +15,10 @@ me_1 : profile_me_1.e
 me_2 : profile_me_2.e
 
 %.o: %.c
-	$(CC) -c $^ -pg $(OPT_FLAGS) -o $@
+	$(CC) $(OPT_FLAGS) -c -p $^ -o $@
 
 %.e: %.o
-	$(CC) $^ -lm -o $@ 
+	$(CC) -g $^ -lm -o $@ 
 
 clean:
 	rm -rfv $(OBJECTS) $(EXECUTABLES)
