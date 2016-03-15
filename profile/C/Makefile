@@ -15,7 +15,7 @@ me_1 : profile_me_1.e
 me_2 : profile_me_2.e
 
 %.o: %.c
-	$(CC) $(OPT_FLAGS) -c -p $^ -o $@
+	$(CC) -c $^ $(OPTFLAGS) -pg -o $@
 
 %.e: %.o
 	$(CC) -g $^ -lm -o $@ 
